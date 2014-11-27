@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Hello world</h2>
+
+<div>
+    <button id="raiseErrorInBrowser">Raise exception (in browser)</button>
+    <button id="raiseErrorServerSide">Raise exception (server-side)</button>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function raiseErrorServerSide() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Home/RaiseServerSideException');
+            xhr.send();
+        }
+
+        function raiseErrorInBrowser() {
+            ({ }).thisMethodDoesNotExist();
+        }
+
+        document.getElementById('raiseErrorInBrowser').addEventListener('click', raiseErrorInBrowser, false);
+        document.getElementById('raiseErrorServerSide').addEventListener('click', raiseErrorServerSide, false);
+    </script>
+}
+
